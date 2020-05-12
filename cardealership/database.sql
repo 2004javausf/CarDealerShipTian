@@ -1,0 +1,18 @@
+CREATE TABLE CUSTOMER (
+   CUSTOMER_ID         INTEGER  GENERATED AS IDENTITY NOT NULL PRIMARY KEY,
+   C_USERNAME          VARCHAR2(15)               NOT NULL,
+   C_PASSWORD          INTEGER                    NOT NULL
+);
+
+CREATE TABLE CAR (
+   CAR_ID              INTEGER  GENERATED AS IDENTITY NOT NULL PRIMARY KEY,
+   CAR_BRAND           VARCHAR2(15)          NOT NULL,
+   CAR_COLOR           VARCHAR2(15)          NOT NULL,
+   CAR_PRICE           INTEGER               NOT NULL,
+   CAR_STATE           INTEGER
+);
+
+CREATE TABLE CAR_OFFER (
+   CAR_ID              INTEGER               NOT NULL,
+   CAR_STATE           INTEGER
+);
