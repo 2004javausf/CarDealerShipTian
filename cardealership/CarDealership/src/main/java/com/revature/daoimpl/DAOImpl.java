@@ -49,12 +49,15 @@ public class DAOImpl implements DAO{
 			
 			stmt.setString(1, customerUsername);
 			stmt.setInt(2, customerPassword);
+			stmt.execute();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				closeResources();
 			}
 		Logs.LogIt("info", "Customer added");
+
+
 	}
 	@Override
 	public List<Customer> getCustomerList() {
@@ -82,17 +85,17 @@ public class DAOImpl implements DAO{
 			conn = cf.getConnection();
 			String sql = "INSERT INTO CAR(CAR_BRAND, CAR_COLOR, CAR_PRICE, CAR_STATE) VALUES (?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
-			
 			stmt.setString(1, carBrand);
 			stmt.setString(2, carColor);
 			stmt.setInt(3, carPrice);
 			stmt.setNull(4, Types.INTEGER);
+			stmt.execute();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				closeResources();
 			}
-		Logs.LogIt("info", "Car added to lot");
+		Logs.LogIt("info", "Car added");
 	}
 	@Override
 	public void removeCar(Integer carId) {
@@ -117,9 +120,8 @@ public class DAOImpl implements DAO{
 		String sql = "SELECT * FROM CAR";
 		stmt = conn.prepareStatement(sql);
 		ResultSet rs = stmt.executeQuery();
-		Car s = null;
 		while(rs.next()) {
-			s = new Car(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5));
+			Car s = new Car(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5));
 			carList.add(s);
 		} 
 		} catch  (SQLException e) {
@@ -154,22 +156,21 @@ public class DAOImpl implements DAO{
 		System.out.println("Please enter your username:");
 		String username = sc.nextLine();
 		System.out.println("Please enter your password:");
-		String password = sc.nextLine();
+		int password = sc.nextInt();
 		Connection conn = cf.getConnection();
-		String sql = "SELECT C_USERNAME, C_PASSWORD FROM CUSTOMER WHERE C_USERNAME = ? AND C_PASSWORD = ?";
+		String sql = "SELECT CUSTOMER_ID,C_USERNAME, C_PASSWORD FROM CUSTOMER WHERE C_USERNAME = ? AND C_PASSWORD = ?";
 		stmt = conn.prepareStatement(sql);
 		stmt.setString(1, username);
-		stmt.setString(2, password);
+		stmt.setInt(2, password);
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next() == false) {
 			System.out.println("Invalid login.");
-			username = null;	
+			username = null;
 		} else {
-			System.out.println("Successfully login.");
+			int customerId = rs.getInt(1);
+			return customerId;
 		}
-		int customerId = rs.getInt(1);
-		return customerId; 
-		
+		return 0;
 		 
 	}
 	@Override
@@ -335,7 +336,7 @@ public class DAOImpl implements DAO{
 		ResultSet rs = stmt.executeQuery();
 		Car s = null;
 		while(rs.next()) {
-			s = new Car(rs.getString(2), rs.getString(3), rs.getInt(4));
+			s = new Car(rs.getInt(1));
 			allPayment.add(s);
 		} 
 		} catch  (SQLException e) {
@@ -344,7 +345,7 @@ public class DAOImpl implements DAO{
 			closeResources();
 		}
 		for(int i = 0; i < allPayment.size(); i++){
-            System.out.println(allPayment.get(i));
+            System.out.println("CarPrice:"+allPayment.get(i).getCarPrice());
         }	
 		
 	}

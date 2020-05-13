@@ -14,6 +14,11 @@ public class Car implements Serializable{
 	public Car() {
 		super();
 	}
+
+	public Car(int carPrice) {
+		this.carPrice = carPrice;
+
+	}
 	
 	public Car(String carBrand, String carColor, int carPrice) {
 		super();

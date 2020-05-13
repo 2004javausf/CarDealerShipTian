@@ -22,6 +22,7 @@ public class Driver {
 			switch(select) {
 			case 1:
 				di.regiser();
+
 			case 2:
 			while(customerId == null) {
 				try {
@@ -67,12 +68,14 @@ public class Driver {
 		System.out.println("Thank you for using this demo");
 		System.exit(0);
 			}
+			break;
 		case 2:
+			Scanner sc3=new Scanner(System.in);
 			System.out.println("Please enter your username:");
-			String eusername = sc.nextLine();
+			String eusername = sc3.nextLine();
 			System.out.println("Please enter your password:");
-			String epassword = sc.nextLine();
-			if (eusername == "employee" && epassword == "123456") {
+			String epassword = sc3.nextLine();
+			if (eusername.equals("employee") && epassword.equals("123456")) {
 				do {
 					System.out.println("Please select an option:");
 					System.out.println("[1] Add car to car lot");
@@ -104,11 +107,12 @@ public class Driver {
 						System.out.println("Invalid input");
 			}
 		case 3:
+			Scanner sc2=new Scanner(System.in);
 			System.out.println("Please enter your username:");
-			String ausername = sc.nextLine();
+			String ausername = sc2.nextLine();
 			System.out.println("Please enter your password:");
-			String apassword = sc.nextLine();
-			if (ausername == "admin" && apassword == "123456") {
+			String apassword = sc2.nextLine();
+			if (ausername.equals( "admin") && apassword.equals("123456")) {
 				do {
 					System.out.println("Please select an option:");
 					System.out.println("[1] Update car state");
@@ -135,6 +139,8 @@ public class Driver {
 					}  else {
 						System.out.println("Invalid input");
 			}
+			default:
+				System.out.println("success");
 				
 	}
 }
