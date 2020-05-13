@@ -15,6 +15,7 @@ import com.revature.beans.CarOffer;
 import com.revature.beans.Customer;
 import com.revature.dao.DAO;
 import com.revature.util.ConnFactory;
+import com.revature.util.Logs;
 
 public class DAOImpl implements DAO{
 	ConnFactory cf = ConnFactory.getInstance();
@@ -53,8 +54,7 @@ public class DAOImpl implements DAO{
 			} finally {
 				closeResources();
 			}
-
-
+		Logs.LogIt("info", "Customer added");
 	}
 	@Override
 	public List<Customer> getCustomerList() {
@@ -92,6 +92,7 @@ public class DAOImpl implements DAO{
 			} finally {
 				closeResources();
 			}
+		Logs.LogIt("info", "Car added to lot");
 	}
 	@Override
 	public void removeCar(Integer carId) {
@@ -105,6 +106,7 @@ public class DAOImpl implements DAO{
 		} finally {
 			closeResources();
 		}
+		Logs.LogIt("info", "Car deleted");
 	}
 		
 	@Override
