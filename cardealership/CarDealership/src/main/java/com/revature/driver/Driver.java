@@ -140,7 +140,7 @@ public class Driver {
 						System.out.println("Invalid input");
 			}
 			default:
-				System.out.println("success");
+				System.out.println("Invalid input");
 				
 	}
 }
